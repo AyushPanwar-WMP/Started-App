@@ -89,6 +89,7 @@ jobs:
    deploy:
     name: deploy
     runs-on: ubuntu-latest
+    environment: Production
     needs: 
        - test 
        - security-scan
@@ -105,5 +106,6 @@ jobs:
             mkdir -p deployed
             cp deployment-artifact/dependency-results.sbom.json deployed/
             echo "Deployment complete: SBOM artifact copied to deployed/"
+
 
 
