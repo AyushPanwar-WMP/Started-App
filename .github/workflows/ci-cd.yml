@@ -37,7 +37,16 @@ jobs:
 
             - name: checkout repository
               uses: actions/checkout@v4
-              
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with: 
+               node-version: "24"
+               cache: npm
+
+            - name: dependencies install
+              run: npm ci
+
             - name: testing
               run: npm test
 
