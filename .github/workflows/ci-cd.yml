@@ -66,6 +66,7 @@ jobs:
             - name: testing
               run: npm test
 
+
     #Security scan for known vulnerabilities
    security-scan:
         name: Security scan
@@ -107,5 +108,9 @@ jobs:
             cp deployment-artifact/dependency-results.sbom.json deployed/
             echo "Deployment complete: SBOM artifact copied to deployed/"
 
-
-
+        - name: verify deployment token
+          env:
+            DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+          run: |
+            "${DEPLOY_TOKEN:?DEPLOY_TOKEN is not configured}"
+            echo "Deployment token is available"
