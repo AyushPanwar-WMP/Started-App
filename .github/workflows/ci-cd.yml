@@ -1,0 +1,23 @@
+name: Node-Workflow-Validation
+
+on:
+  push:
+    branches: ["*"]
+  workflow_dispatch:
+
+env:
+  WORKFLOW_ENV: workflow-value
+
+jobs:
+  env-var:
+    name: env-var
+    runs-on: ubuntu-latest
+    env:
+      JOB_ENV: job-value
+    steps:
+
+      - name: show environment variables
+        run: |
+          echo "Workflow variable: $WORKFLOW_ENV"
+          echo "Job variable: $JOB_ENV"
+

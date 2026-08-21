@@ -1,0 +1,12 @@
+{
+	"$schema": "https://json.schemastore.org/package.json",
+"name": "cicd-assessment-app",
+"version": "1.0.0",
+"scripts": {
+"build": "echo 'Build step complete' && mkdir -p dist && cp app.js dist/",
+"test": "jest"
+},
+"devDependencies": {
+"jest": "^29.0.0"
+}
+}
