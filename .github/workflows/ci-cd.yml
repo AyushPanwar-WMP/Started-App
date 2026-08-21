@@ -9,15 +9,24 @@ env:
   WORKFLOW_ENV: workflow-value
 
 jobs:
-  env-var:
-    name: env-var
-    runs-on: ubuntu-latest
-    env:
-      JOB_ENV: job-value
-    steps:
+   build:
+        name: build
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [20,22,24]
+        steps:
 
-      - name: show environment variables
-        run: |
-          echo "Workflow variable: $WORKFLOW_ENV"
-          echo "Job variable: $JOB_ENV"
+            - name: checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with: 
+               node-version: "${{matrix.node-version}}"
+               cache: npm
+
+            - name: dependencies install
+              run: npm ci
+   
 
