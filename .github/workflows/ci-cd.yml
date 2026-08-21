@@ -28,6 +28,22 @@ jobs:
 
             - name: dependencies install
               run: npm ci
+#generate the artifacts
+            - name: Run Trivy in GitHub SBOM mode and submit results to Dependency Graph
+              uses: aquasecurity/trivy-action@v0.36.0
+              with:
+               scan-type: 'fs'
+               format: 'github'
+               output: 'dependency-results.sbom.json'
+               scan-ref: '.'
+               github-pat: ${{ secrets.GITHUB_TOKEN }} 
+ #upload artifact
+            - name: upload SBOM artifact to github
+              uses: actions/upload-artifact@v4
+              with:
+                name: custom-warrehous
+                path: "dependency-results.sbom.json"
+                retention-days: 14 
 
    test:
         name: test
@@ -69,10 +85,3 @@ jobs:
               with:
                config: p/javascript
 
-     #upload artifact
-            - name: upload SBOM artifact to github
-              uses: actions/upload-artifact@v4
-              with:
-                name: custom-warrehous
-                path: "dependency-results.sbom.json"
-                retention-days: 14
