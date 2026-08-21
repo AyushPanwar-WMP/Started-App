@@ -89,7 +89,7 @@ jobs:
 #deploy
    deploy:
     name: deploy
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment: Production
     needs: 
        - test 
