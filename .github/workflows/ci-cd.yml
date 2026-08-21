@@ -112,5 +112,10 @@ jobs:
           env:
             DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
           run: |
-            "${DEPLOY_TOKEN:?DEPLOY_TOKEN is not configured}"
+            if [ -z "$DEPLOY_TOKEN" ]; then
+              echo "DEPLOY_TOKEN is not configured"
+              exit 1
+            fi
             echo "Deployment token is available"
+
+        
