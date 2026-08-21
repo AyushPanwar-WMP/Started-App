@@ -28,5 +28,12 @@ jobs:
 
             - name: dependencies install
               run: npm ci
-   
+
+   test:
+        name: test
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: testing
+              run: npm test
 
